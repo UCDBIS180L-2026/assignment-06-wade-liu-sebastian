@@ -26,12 +26,9 @@ ui <- fluidPage( #create the overall page
     # Sidebar with a radio box to input which trait will be plotted
     sidebarLayout(
       sidebarPanel(
-        radioButtons("trait", #the input variable that the value will go into
-                     "Choose a trait to display:",
-                     c("Sepal.Length",
-                       "Sepal.Width",
-                       "Petal.Length",
-                       "Petal.Width")
+        radioButtons("species", #the input variable that the value will go into
+                     "Choose a species to display:",
+                     c("setosa", "versicolor", "virginica")
         )),
       
       # Show a plot of the generated distribution
@@ -54,15 +51,19 @@ server <- function(input, output) {
   
   output$violin_plot <- renderPlot({
     
-    plotTrait <- as.name(input$trait) # convert string to name
+    iris_species <- iris %>%
+      filter(Species == input$species)
+    
+    iris_long <- iris_species %>%
+      pivot_longer(
+        cols = c(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width),
+        names_to = "Trait",
+        values_to = "Value"
+      )
     
     # set up the plot
-    pl <- ggplot(data = iris,
-                 aes(x=Species,
-                     y= !! plotTrait, # !! to use the column names contained in plotTrait
-                     fill=Species
-                 )
-    )
+    pl <- ggplot(iris_long, aes(x = Trait, y = Value, fill = Trait)) +
+      geom_violin(trim = FALSE)
     
     # draw the boxplot for the specified trait
     pl + geom_violin()
