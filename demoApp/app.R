@@ -62,7 +62,8 @@ server <- function(input, output) {
       )
     
     # set up the plot
-    pl <- ggplot(iris_long, aes(x = Trait, y = Value, fill = Trait)) 
+    pl <- ggplot(iris_long, aes(x = Trait, y = Value, fill = Trait)) +
+      geom_violin(trim = FALSE)
     
     # draw the boxplot for the specified trait
     pl + geom_violin()
