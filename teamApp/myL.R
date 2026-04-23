@@ -1,24 +1,33 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    https://shiny.posit.co/
-#
-
 library(shiny)
 library(tidyverse)
+library(readr)
+dataset <- read_csv("Data_S1.csv")
+# other libraries here
 
-data(iris)
+# data loading and one-time processing here
 
-# Define UI for application that draws a box plot
+
+# Define UI for application 
 ui <- fluidPage( #create the overall page
+  #UI code here
+)
+
+
+# Define server logic 
+server <- function(input, output) {
+  # server code here
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+#example
+
+
+ui <- fluidPage( 
+  titlePanel("Eutherian Mammals"),
   
-  # Application title
-  titlePanel("Iris Data"),
-  
-  # Some helpful information
   helpText("This application creates a violin plot to show difference between",
            "iris species.  Please use the radio box below to choose a trait",
            "for plotting"),
@@ -26,9 +35,9 @@ ui <- fluidPage( #create the overall page
   # Sidebar with a radio box to input which trait will be plotted
   sidebarLayout(
     sidebarPanel(
-      radioButtons("species", #the input variable that the value will go into
-                   "Choose a species to display:",
-                   c("setosa", "versicolor", "virginica")
+      radioButtons("order", #the input variable that the value will go into
+                   "Choose a order to display:",
+                   c("Cetacea", "Adrosoricida", "Artidodactyla","Carnivora",'Cingulata',"Eulipotyphla","Lagomorpha","New_World_monkeys","Old_World_monkeys","Perissodactyla","")
       )),
     
     # Show a plot of the generated distribution
@@ -62,7 +71,8 @@ server <- function(input, output) {
       )
     
     # set up the plot
-    pl <- ggplot(iris_long, aes(x = Trait, y = Value, fill = Trait)) 
+    pl <- ggplot(iris_long, aes(x = Trait, y = Value, fill = Trait)) +
+      geom_violin(trim = FALSE)
     
     # draw the boxplot for the specified trait
     pl + geom_violin()
