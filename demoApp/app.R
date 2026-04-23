@@ -14,29 +14,29 @@ data(iris)
 
 # Define UI for application that draws a box plot
 ui <- fluidPage( #create the overall page
+  
+  # Application title
+  titlePanel("Iris Data"),
+  
+  # Some helpful information
+  helpText("This application creates a violin plot to show difference between",
+           "iris species.  Please use the radio box below to choose a trait",
+           "for plotting"),
+  
+  # Sidebar with a radio box to input which trait will be plotted
+  sidebarLayout(
+    sidebarPanel(
+      radioButtons("species", #the input variable that the value will go into
+                   "Choose a species to display:",
+                   c("setosa", "versicolor", "virginica")
+      )),
     
-    # Application title
-    titlePanel("Iris Data"),
-    
-    # Some helpful information
-    helpText("This application creates a violin plot to show difference between",
-             "iris species.  Please use the radio box below to choose a trait",
-             "for plotting"),
-    
-    # Sidebar with a radio box to input which trait will be plotted
-    sidebarLayout(
-      sidebarPanel(
-        radioButtons("species", #the input variable that the value will go into
-                     "Choose a species to display:",
-                     c("setosa", "versicolor", "virginica")
-        )),
-      
-      # Show a plot of the generated distribution
-      mainPanel(
-        plotOutput("violin_plot")
-      )
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("violin_plot")
     )
   )
+)
 
 
 # Define server logic required to draw a box. plot
