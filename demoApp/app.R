@@ -19,7 +19,7 @@ ui <- fluidPage( #create the overall page
     titlePanel("Iris Data"),
     
     # Some helpful information
-    helpText("This application creates a boxplot to show difference between",
+    helpText("This application creates a violin plot to show difference between",
              "iris species.  Please use the radio box below to choose a trait",
              "for plotting"),
     
@@ -36,7 +36,7 @@ ui <- fluidPage( #create the overall page
       
       # Show a plot of the generated distribution
       mainPanel(
-        plotOutput("boxPlot")
+        plotOutput("violin_plot")
       )
     )
   )
@@ -52,7 +52,7 @@ server <- function(input, output) {
   #     when inputs change
   #  2) Its output type is a plot
   
-  output$boxPlot <- renderPlot({
+  output$violin_plot <- renderPlot({
     
     plotTrait <- as.name(input$trait) # convert string to name
     
@@ -65,7 +65,7 @@ server <- function(input, output) {
     )
     
     # draw the boxplot for the specified trait
-    pl + geom_boxplot()
+    pl + geom_violin()
   })
 }
 
