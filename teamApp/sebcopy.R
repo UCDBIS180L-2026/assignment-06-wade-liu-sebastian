@@ -3,7 +3,8 @@ library(tidyverse)
 library(readr)
 library(bslib)
 library(thematic)
-dataset <- read_csv("Data_S1.csv")
+library(janitor)
+Data_S1 <- read_csv("Data_S1.csv")%>% clean_names()
 # other libraries here
 
 thematic_shiny(font = "auto")
