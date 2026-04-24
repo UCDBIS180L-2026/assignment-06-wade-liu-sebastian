@@ -18,7 +18,7 @@ Data_S1 <- Data_S1 |> mutate(bodymass_life_ratio = Bodymass/Longevity)
 ui <- navbarPage(
   theme = bs_theme(bootswatch = "flatly"),
   nav_spacer(),
-  nav_item(input_dark_mode(id = "theme_toggle")), # 
+  nav_item(input_dark_mode(id = "theme_toggle")), 
   tabPanel("Histogram",
     sidebarLayout(
       sidebarPanel(
@@ -33,10 +33,15 @@ ui <- navbarPage(
       sidebarPanel(
         selectInput("Order", #the input variable that the value will go into
                   "Choose a order to display:",
-                  c("Cetacea", "Adrosoricida", "Artidodactyla","Carnivora",'Cingulata',"Eulipotyphla","Lagomorpha","New_World_monkeys","Old_World_monkeys","Perissodactyla","")    
+                  c("Cetacea", "Adrosoricida", "Artidodactyla","Carnivora",'Cingulata',"Eulipotyphla","Lagomorpha","New_World_monkeys","Old_World_monkeys","Perissodactyla")    
     )),
     mainPanel(
       plotOutput("species_plot")),
+  
+  tabPanel("About"),
+    fluidRow(
+      
+    )
       )
   )
 )
