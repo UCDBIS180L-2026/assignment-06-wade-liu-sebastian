@@ -1,0 +1,10 @@
+name: my-shiny-app
+title:
+username: sebastianmoretti
+account: sebastianmoretti
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17251441
+bundleId: 11920736
+url: https://sebastianmoretti.shinyapps.io/my-shiny-app/
+version: 1
