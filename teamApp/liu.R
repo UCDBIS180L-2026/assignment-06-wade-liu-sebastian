@@ -7,6 +7,7 @@ library("paletteer")
 library("ggplot2")
 library("shiny")
 library("readr")
+library("markdown")
 
 data <- read_csv("Data_S1.csv")%>% clean_names()
 

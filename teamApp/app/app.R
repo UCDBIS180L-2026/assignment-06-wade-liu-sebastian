@@ -5,6 +5,8 @@ library(readr)
 library(bslib)
 library(thematic)
 library(janitor)
+library(markdown)
+
 
 # data loading and one-time processing here
 Data_S1 <- read_csv("Data_S1.csv")
@@ -92,11 +94,14 @@ server <- function(input, output) {
   output$species_plot <- renderPlot({
     order_data <- Data_S1 %>%
       filter(Order == input$Order_plot)
+#loads the theme switching package for the graphs
     thematic_shiny()
+#Creates the plot seen in the body mass plot
     ggplot(order_data, aes(x = Bodymass, y = Longevity)) +
       geom_point() +
       geom_text(aes(label = Species), size = 2) +
       scale_x_log10() +
+# Creates the labels for the graph
       labs(
         x = "Body Mass",
         y = "Longevity"
